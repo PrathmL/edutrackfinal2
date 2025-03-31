@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #1cc88a;
+            --danger-color: #e74a3b;
+            --warning-color: #f6c23e;
+            --dark-color: #5a5c69;
+            --light-color: #f8f9fc;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        
+        .container {
+            margin-top: 30px;
+            padding-bottom: 50px;
+        }
+        
+        .header-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+            position: relative;
+        }
+        
+        h1 {
+            color: var(--dark-color);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0;
+        }
+        
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .btn-logout {
+            background-color: var(--danger-color);
+            border-color: var(--danger-color);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-logout:hover {
+            background-color: #d52a1a;
+            border-color: #cc291a;
+            transform: translateY(-2px);
+        }
+        
+        .complaint-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #d1d3e2;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+        }
+        
+        .btn-submit {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 50px;
+            padding: 10px 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: block;
+            margin: 30px auto 0;
+            width: 200px;
+        }
+        
+        .btn-submit:hover {
+            background-color: #2e59d9;
+            border-color: #2653d4;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(78, 115, 223, 0.4);
+        }
+        
+        .form-icon {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+        
+        .input-group-text {
+            background-color: #f8f9fc;
+            border-right: none;
+        }
+        
+        .input-group .form-control {
+            border-left: none;
+        }
+        
+        .input-group .form-control:focus {
+            box-shadow: none;
+        }
+        
+        .input-group:focus-within .input-group-text {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin-top: 20px;
+                padding-bottom: 30px;
+            }
+            
+            .header-card {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-card">
+        <h1><i class="fas fa-exclamation-circle mr-2"></i>Submit Complaint</h1>
+        <div class="logout-button">
+            <button id="logoutButton" class="btn btn-logout">
+                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+            </button>
+        </div>
+    </div>
+
+    <div class="complaint-card">
+        <form id="complaintForm">
+            <div class="form-group">
+                <label for="username"><i class="fas fa-user form-icon"></i>Username</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="user_class"><i class="fas fa-users form-icon"></i>Class</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-users"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="user_class" placeholder="Enter your class" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="description"><i class="fas fa-comment-dots form-icon"></i>Complaint Description</label>
+                <textarea class="form-control" id="description" rows="5" placeholder="Please describe your complaint in detail..." required></textarea>
+                <small class="form-text text-muted">Please be as specific as possible about your issue.</small>
+            </div>
+            
+            <button type="submit" class="btn btn-submit">
+                <i class="fas fa-paper-plane mr-2"></i>Submit
+            </button>
+        </form>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Handle Complaint Form Submission
+        $("#complaintForm").on("submit", function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = $(this).find('button[type="submit"]');
+            submitBtn.html('<i class="fas fa-spinner fa-spin mr-2"></i>Submitting...');
+            submitBtn.prop('disabled', true);
+            
+            let formData = {
+                username: $("#username").val(),
+                user_class: $("#user_class").val(),
+                description: $("#description").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/addComplaint",
+                data: JSON.stringify(formData),
+                contentType: "application/json",
+                success: function(response) {
+                    // Show success message
+                    submitBtn.html('<i class="fas fa-check mr-2"></i>Submitted!');
+                    setTimeout(() => {
+                        submitBtn.html('<i class="fas fa-paper-plane mr-2"></i>Submit');
+                        submitBtn.prop('disabled', false);
+                    }, 2000);
+                    
+                    // Show alert with better styling
+                    $('<div class="alert alert-success alert-dismissible fade show" role="alert">' +
+                      '<strong>Success!</strong> Your complaint has been submitted.' +
+                      '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                      '<span aria-hidden="true">&times;</span></button></div>')
+                      .insertBefore('#complaintForm')
+                      .delay(3000)
+                      .fadeOut();
+                    
+                    $("#complaintForm")[0].reset();
+                },
+                error: function(error) {
+                    console.error("Failed to submit complaint", error);
+                    submitBtn.html('<i class="fas fa-paper-plane mr-2"></i>Submit');
+                    submitBtn.prop('disabled', false);
+                    
+                    // Show error message
+                    $('<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                      '<strong>Error!</strong> Failed to submit complaint. Please try again.' +
+                      '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                      '<span aria-hidden="true">&times;</span></button></div>')
+                      .insertBefore('#complaintForm');
+                }
+            });
+        });
+
+        // Handle Logout
+        $("#logoutButton").on("click", function() {
+            $.ajax({
+                type: "POST",
+                url: "/logout",
+                success: function(response) {
+                    window.location.href = "/login";
+                },
+                error: function(error) {
+                    console.error("Logout failed", error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

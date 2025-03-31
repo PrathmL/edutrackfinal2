@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | EduTrack</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4bb543;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+            color: var(--dark-color);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        .container {
+            max-width: 500px;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        
+        .top-right-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .top-right-buttons .btn {
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .top-right-buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .input-group-text {
+            cursor: pointer;
+            background-color: var(--light-color);
+            border: none;
+        }
+        
+        .success-message {
+            display: none;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+        
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            margin: 40px 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        .card-header {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.8rem;
+            border: none;
+        }
+        
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 50px;
+            padding: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(63, 55, 201, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(63, 55, 201, 0.6);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+        
+        .decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(76, 201, 240, 0.2) 0%, rgba(76, 201, 240, 0) 70%);
+            z-index: -1;
+        }
+        
+        .decoration-1 {
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+        }
+        
+        .decoration-2 {
+            bottom: -100px;
+            left: -50px;
+            width: 400px;
+            height: 400px;
+        }
+        
+        .input-group {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px !important;
+        }
+        
+        .input-group-text {
+            background-color: white;
+            border-left: none !important;
+        }
+        
+        .input-group .form-control {
+            border-right: none;
+        }
+        
+        .footer-text {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .footer-text a {
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                margin: 30px 0;
+            }
+            
+            .container {
+                margin-top: 20px;
+                padding: 15px;
+            }
+            
+            .top-right-buttons {
+                top: 15px;
+                right: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2rem;
+                margin: 20px 0;
+            }
+            
+            .card-header {
+                font-size: 1.5rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="decoration decoration-1"></div>
+    <div class="decoration decoration-2"></div>
+    
+    <div class="top-right-buttons">
+        <a href="login.html" class="btn btn-light">Login</a>
+        <a href="admin.html" class="btn btn-light">Admin</a>
+    </div>
+
+    <div class="container animate__animated animate__fadeIn">
+        <div class="text-center mb-4">
+            <h1 class="floating">EduTrack</h1>
+        </div>
+        
+        <div class="glass-card">
+            <div class="card-header">
+                Create Account
+            </div>
+            <div class="card-body p-4">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rollno">Roll Number</label>
+                        <input type="text" class="form-control" id="rollno" placeholder="Enter your roll number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="class">Class</label>
+                        <select class="form-control" id="class" required>
+                            <option value="" disabled selected>Select your class</option>
+                            <option value="MCA">Master of Computer Applications</option>
+                            <option value="MBA">Master of Business Administration</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="togglePassword">
+                                    <i class="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <small class="form-text text-muted">Use 8 or more characters with a mix of letters, numbers & symbols</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-4">
+                        <i class="fas fa-user-plus mr-2"></i> Register Now
+                    </button>
+                </form>
+                <div class="alert alert-success success-message animate__animated animate__fadeIn" role="alert">
+                    <i class="fas fa-check-circle mr-2"></i> Registration successful! Redirecting to login page...
+                </div>
+            </div>
+        </div>
+        
+        <p class="footer-text">
+            Already have an account? <a href="login.html">Sign in</a> | 
+            &copy; 2023 EduTrack. All rights reserved.
+        </p>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".success-message").hide();  // Hide success message by default
+
+            // Create floating particles
+            function createParticles() {
+                const particlesContainer = $('#particles');
+                const particleCount = 20;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const size = Math.random() * 8 + 2;
+                    const posX = Math.random() * 100;
+                    const duration = Math.random() * 20 + 10;
+                    const delay = Math.random() * 5;
+                    
+                    $('<div>').addClass('particle').css({
+                        width: `${size}px`,
+                        height: `${size}px`,
+                        left: `${posX}%`,
+                        top: '100vh',
+                        opacity: Math.random() * 0.5 + 0.1,
+                        animation: `float ${duration}s linear ${delay}s infinite`
+                    }).appendTo(particlesContainer);
+                }
+            }
+            
+            createParticles();
+
+            $("#registerForm").on("submit", function (e) {
+                e.preventDefault();
+                let formData = {
+                    name: $("#name").val(),
+                    rollno: $("#rollno").val(),
+                    class: $("#class").val(),
+                    email: $("#email").val(),
+                    password: $("#password").val()
+                };
+                
+                // Simulate API call with animation
+                $(".btn-primary").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Registering...').prop('disabled', true);
+                
+                setTimeout(function() {
+                    // This is just for demo - replace with actual AJAX call
+                    $.ajax({
+                        type: "POST",
+                        url: "/register",
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        success: function (response) {
+                            // Clear the input fields after successful registration
+                            $("#registerForm")[0].reset();
+                            // Show success message with animation
+                            $(".success-message").show().addClass('animate__fadeIn');
+                            // Redirect to login page after 2 seconds
+                            setTimeout(function () {
+                                window.location.href = "/login";
+                            }, 2000);
+                        },
+                        error: function (error) {
+                            $(".btn-primary").html('<i class="fas fa-user-plus mr-2"></i> Register Now').prop('disabled', false);
+                            // Show error animation
+                            $(".glass-card").addClass('animate__animated animate__shakeX');
+                            setTimeout(() => {
+                                $(".glass-card").removeClass('animate__animated animate__shakeX');
+                            }, 1000);
+                            
+                            alert("Registration failed! Please check your details and try again.");
+                        }
+                    });
+                }, 1500);
+            });
+
+            $("#togglePassword").on("click", function () {
+                const passwordField = $("#password");
+                const type = passwordField.attr("type") === "password" ? "text" : "password";
+                passwordField.attr("type", type);
+                $(this).find("i").toggleClass("fa-eye fa-eye-slash");
+            });
+            
+            // Add animation to form elements on focus
+            $("input, select").focus(function() {
+                $(this).parent().addClass('animate__animated animate__pulse');
+            }).blur(function() {
+                $(this).parent().removeClass('animate__animated animate__pulse');
+            });
+        });
+    </script>
+</body>
+</html>

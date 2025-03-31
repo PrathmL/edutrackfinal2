@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #1cc88a;
+            --danger-color: #e74a3b;
+            --warning-color: #f6c23e;
+            --dark-color: #5a5c69;
+            --light-color: #f8f9fc;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        
+        .leave-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 0 15px;
+        }
+        
+        .leave-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            transition: transform 0.3s ease;
+        }
+        
+        .leave-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        h1 {
+            color: var(--dark-color);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-group label i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #d1d3e2;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+        }
+        
+        .btn-submit {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: block;
+            margin: 40px auto 0;
+            width: 200px;
+        }
+        
+        .btn-submit:hover {
+            background-color: #2e59d9;
+            border-color: #2653d4;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(78, 115, 223, 0.4);
+        }
+        
+        .input-group-text {
+            background-color: #f8f9fc;
+            border-right: none;
+        }
+        
+        .input-group .form-control {
+            border-left: none;
+        }
+        
+        .input-group .form-control:focus {
+            box-shadow: none;
+        }
+        
+        .input-group:focus-within .input-group-text {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .leave-container {
+                margin: 30px auto;
+            }
+            
+            .leave-card {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="leave-container">
+    <div class="leave-card">
+        <h1><i class="fas fa-calendar-alt mr-2"></i>Leave Application</h1>
+        
+        <form id="leaveForm">
+            <div class="form-group">
+                <label for="student_name"><i class="fas fa-user"></i>Student Name</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="student_name" placeholder="Enter your full name" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="student_class"><i class="fas fa-users"></i>Class</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-users"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="student_class" placeholder="Enter your class and section" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="start_date"><i class="fas fa-calendar-day"></i>Start Date</label>
+                <input type="date" class="form-control" id="start_date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="end_date"><i class="fas fa-calendar-week"></i>End Date</label>
+                <input type="date" class="form-control" id="end_date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="reason"><i class="fas fa-comment-dots"></i>Reason for Leave</label>
+                <textarea class="form-control" id="reason" rows="5" placeholder="Please provide details about your leave request..." required></textarea>
+                <small class="form-text text-muted">Be specific about your reason for better consideration.</small>
+            </div>
+            
+            <button type="submit" class="btn btn-submit">
+                <i class="fas fa-paper-plane mr-2"></i>Submit
+            </button>
+        </form>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#leaveForm").on("submit", function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = $(this).find('button[type="submit"]');
+            submitBtn.html('<i class="fas fa-spinner fa-spin mr-2"></i>Submitting...');
+            submitBtn.prop('disabled', true);
+            
+            const formData = {
+                student_name: $("#student_name").val(),
+                student_class: $("#student_class").val(),
+                start_date: $("#start_date").val(),
+                end_date: $("#end_date").val(),
+                reason: $("#reason").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/submitLeave",
+                data: JSON.stringify(formData),
+                contentType: "application/json",
+                success: function(response) {
+                    // Show success message
+                    submitBtn.html('<i class="fas fa-check mr-2"></i>Submitted!');
+                    setTimeout(() => {
+                        submitBtn.html('<i class="fas fa-paper-plane mr-2"></i>Submit');
+                        submitBtn.prop('disabled', false);
+                    }, 2000);
+                    
+                    // Show alert with better styling
+                    $('<div class="alert alert-success alert-dismissible fade show" role="alert">' +
+                      '<strong>Success!</strong> Your leave application has been submitted.' +
+                      '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                      '<span aria-hidden="true">&times;</span></button></div>')
+                      .insertBefore('#leaveForm')
+                      .delay(3000)
+                      .fadeOut();
+                    
+                    $("#leaveForm")[0].reset();
+                },
+                error: function(error) {
+                    console.error("Failed to submit leave application", error);
+                    submitBtn.html('<i class="fas fa-paper-plane mr-2"></i>Submit');
+                    submitBtn.prop('disabled', false);
+                    
+                    // Show error message
+                    $('<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                      '<strong>Error!</strong> Failed to submit leave application. Please try again.' +
+                      '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                      '<span aria-hidden="true">&times;</span></button></div>')
+                      .insertBefore('#leaveForm');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

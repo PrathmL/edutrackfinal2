@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | EduTrack</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4bb543;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .welcome-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .user-welcome {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logout-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            margin-bottom: 30px; /* Increased margin-bottom for more space */
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .card-text {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .btn-card {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-weight: 500;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+            color: white;
+        }
+        
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .logout-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            max-width: 300px;
+            z-index: 1000;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+            border-radius: 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .footer {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+        }
+        
+        .footer a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Added row spacing */
+        .card-row {
+            margin-bottom: 40px; /* Increased space between rows */
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1rem;
+            }
+            
+            .card-row {
+                margin-bottom: 30px; /* Adjusted for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-graduation-cap mr-2"></i>EduTrack
+            </a>
+            <div class="ml-auto d-flex align-items-center">
+                <div class="user-welcome mr-3">
+                    <i class="fas fa-user-circle mr-2"></i>
+                    <span id="welcomeUser">Welcome, User!</span>
+                </div>
+                <button id="logoutButton" class="logout-btn">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="welcome-container text-center animate__animated animate__fadeIn">
+        <div class="container">
+            <h1 class="welcome-title">Student Dashboard</h1>
+            <p class="welcome-subtitle">Access all your academic resources in one place</p>
+        </div>
+    </div>
+
+    <div class="container animate__animated animate__fadeInUp">
+        <!-- First Row -->
+        <div class="row card-row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="icon-container">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h5 class="card-title">View Courses</h5>
+                        <p class="card-text">Browse and manage your courses for the current semester</p>
+                        <a href="viewCourses.html" class="btn btn-card">Go to Courses</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="icon-container">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h5 class="card-title">Online Examination</h5>
+                        <p class="card-text">Take your exams through our secure online portal</p>
+                        <a href="http://localhost/oes/" class="btn btn-card">Exam Portal</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="icon-container">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h5 class="card-title">Attendance</h5>
+                        <p class="card-text">Track and monitor your class attendance records</p>
+                        <a href="/viewAttendance" class="btn btn-card">View Attendance</a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End First Row -->
+        
+        <!-- Second Row -->
+        <div class="row card-row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="icon-container">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <h5 class="card-title">Complaint Portal</h5>
+                        <p class="card-text">Your feedback and concerns are important to us</p>
+                        <a href="/userComplaint" class="btn btn-card">Submit Complaint</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="icon-container">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h5 class="card-title">About Us</h5>
+                        <p class="card-text">Learn about the team behind EduTrack</p>
+                        <a href="/AboutUsSection.html" class="btn btn-card">About Team</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="icon-container">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </div>
+                        <h5 class="card-title">Leave Application</h5>
+                        <p class="card-text">Submit and manage your leave applications</p>
+                        <a href="/leaveApplication" class="btn btn-card">Apply for Leave</a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Second Row -->
+        
+        <!-- Third Row -->
+        <div class="row card-row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="icon-container">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h5 class="card-title">Leave Status</h5>
+                        <p class="card-text">Check the status of your submitted leave applications</p>
+                        <a href="/checkLeaveStatus" class="btn btn-card">Check Status</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="icon-container">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h5 class="card-title">Notices</h5>
+                        <p class="card-text">Stay updated with the latest announcements</p>
+                        <a href="/viewNotices" class="btn btn-card">View Notices</a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Third Row -->
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <div class="mb-3">
+                <a href="#" class="mx-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="mx-2"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="mx-2"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2023 EduTrack. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="/privacy" class="mx-2">Privacy Policy</a>
+                <a href="/terms" class="mx-2">Terms of Service</a>
+                <a href="/contact" class="mx-2">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+
+    <div class="alert alert-success logout-message" role="alert">
+        <i class="fas fa-check-circle mr-2"></i> Logged out successfully! Redirecting...
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get("name");
+            $("#welcomeUser").text(`Welcome, ${name || 'Student'}!`);
+
+            $("#logoutButton").on("click", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/logout",
+                    success: function (response) {
+                        // Show logout message
+                        $(".logout-message").show();
+                        // Redirect to login page after 2 seconds
+                        setTimeout(function () {
+                            window.location.href = "/login";
+                        }, 1500);
+                    },
+                    error: function (error) {
+                        console.error("Logout failed");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

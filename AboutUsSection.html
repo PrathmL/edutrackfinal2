@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #1cc88a;
+            --accent-color: #f6c23e;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #224abe 100%);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: #f8f9fa;
+            transform: skewY(-3deg);
+            z-index: 1;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .team-section {
+            padding: 60px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .team-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        
+        .team-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            width: 280px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .team-img-container {
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+        }
+        
+        .team-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .social-links {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            background: rgba(78, 115, 223, 0.9);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .team-card:hover .social-links {
+            bottom: 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .card-body {
+            padding: 25px 20px;
+        }
+        
+        .team-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .team-card h4 {
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .team-card p {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+        
+        .university-badge {
+            background-color: var(--light-color);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .university-badge img {
+            height: 80px;
+            margin: 0 20px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .university-badge img:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .team-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero-section">
+    <div class="container">
+        <h1>Meet Our Team</h1>
+        <p>We are a group of passionate MCA students dedicated to creating innovative solutions and pushing the boundaries of technology.</p>
+    </div>
+</div>
+
+<div class="team-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Developers</h2>
+        </div>
+        
+        <div class="team-container">
+            <!-- Person 1 -->
+            <div class="team-card">
+                <div class="team-img-container">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Landge Prathmesh">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Landge Prathmesh</h3>
+                    <h4>MCA Student (SEM-II)</h4>
+                    <p>Full Stack Developer with expertise in JavaScript frameworks and cloud technologies.</p>
+                </div>
+            </div>
+            
+            <!-- Person 2 -->
+            <div class="team-card">
+                <div class="team-img-container">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Badgujar Chetan">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Badgujar Chetan</h3>
+                    <h4>MCA Student (SEM-II)</h4>
+                    <p>Backend specialist with strong skills in database design and server architecture.</p>
+                </div>
+            </div>
+            
+            <!-- Person 3 -->
+            <div class="team-card">
+                <div class="team-img-container">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Sarah Johnson">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Sarah Johnson</h3>
+                    <h4>UI/UX Designer</h4>
+                    <p>Creates beautiful, intuitive interfaces that enhance user experience.</p>
+                </div>
+            </div>
+            
+            <!-- Person 4 -->
+            <div class="team-card">
+                <div class="team-img-container">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Michael Brown">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Michael Brown</h3>
+                    <h4>Project Mentor</h4>
+                    <p>Provides guidance and ensures our projects meet industry standards.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="university-badge">
+    <div class="container">
+        <h3>Proudly Associated With</h3>
+        <img src="https://via.placeholder.com/150x80?text=University+Logo" alt="University Logo">
+        <img src="https://via.placeholder.com/150x80?text=College+Logo" alt="College Logo">
+        <img src="https://via.placeholder.com/150x80?text=Department+Logo" alt="Department Logo">
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

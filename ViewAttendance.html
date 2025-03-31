@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Attendance</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #1cc88a;
+            --danger-color: #e74a3b;
+            --warning-color: #f6c23e;
+            --dark-color: #5a5c69;
+            --light-color: #f8f9fc;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .container {
+            margin-top: 30px;
+            padding-bottom: 50px;
+        }
+        
+        .header-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+            position: relative;
+        }
+        
+        h1 {
+            color: var(--dark-color);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0;
+        }
+        
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .btn-logout {
+            background-color: var(--danger-color);
+            border-color: var(--danger-color);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-logout:hover {
+            background-color: #d52a1a;
+            border-color: #cc291a;
+            transform: translateY(-2px);
+        }
+        
+        .attendance-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: var(--dark-color);
+            font-weight: 600;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+        
+        .table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            margin-bottom: 0;
+        }
+        
+        .table thead th {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-weight: 600;
+            padding: 15px;
+        }
+        
+        .table tbody td {
+            padding: 15px;
+            vertical-align: middle;
+            border-top: 1px solid #e3e6f0;
+        }
+        
+        .table tbody tr:first-child td {
+            border-top: none;
+        }
+        
+        .table tbody tr:hover td {
+            background-color: rgba(78, 115, 223, 0.05);
+        }
+        
+        .status-present {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .status-absent {
+            color: var(--danger-color);
+            font-weight: 600;
+        }
+        
+        .status-late {
+            color: var(--warning-color);
+            font-weight: 600;
+        }
+        
+        .attendance-summary {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .summary-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+            margin: 10px;
+            flex: 1;
+            min-width: 150px;
+            transition: all 0.3s;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .summary-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .summary-label {
+            color: var(--dark-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .present-card {
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .absent-card {
+            border-top: 4px solid var(--danger-color);
+        }
+        
+        .late-card {
+            border-top: 4px solid var(--warning-color);
+        }
+        
+        .total-card {
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .attendance-summary {
+                flex-direction: column;
+            }
+            
+            .summary-card {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-card">
+        <h1><i class="fas fa-calendar-check mr-2"></i>My Attendance</h1>
+        <div class="logout-button">
+            <button id="logoutButton" class="btn btn-logout">
+                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+            </button>
+        </div>
+    </div>
+
+    <div class="attendance-card">
+        <h2><i class="fas fa-list-alt mr-2"></i>Attendance Records</h2>
+        
+        <div class="table-responsive">
+            <table class="table" id="attendanceTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Status</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Attendance records will be dynamically populated from database -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="attendance-summary">
+            <div class="summary-card present-card">
+                <div class="summary-value" id="presentCount">0</div>
+                <div class="summary-label">Present</div>
+            </div>
+            <div class="summary-card absent-card">
+                <div class="summary-value" id="absentCount">0</div>
+                <div class="summary-label">Absent</div>
+            </div>
+            <div class="summary-card late-card">
+                <div class="summary-value" id="lateCount">0</div>
+                <div class="summary-label">Late</div>
+            </div>
+            <div class="summary-card total-card">
+                <div class="summary-value" id="totalCount">0</div>
+                <div class="summary-label">Total</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Function to populate the table with attendance data
+        function populateTable(records) {
+            let attendanceTable = $("#attendanceTable tbody");
+            attendanceTable.empty();
+            
+            let presentCount = 0;
+            let absentCount = 0;
+            let lateCount = 0;
+            
+            records.forEach(record => {
+                const date = moment(record.date).format("MMM D, YYYY");
+                const day = moment(record.date).format("dddd");
+                
+                let statusClass = "";
+                if (record.status === "Present") {
+                    statusClass = "status-present";
+                    presentCount++;
+                } else if (record.status === "Absent") {
+                    statusClass = "status-absent";
+                    absentCount++;
+                } else if (record.status === "Late") {
+                    statusClass = "status-late";
+                    lateCount++;
+                }
+                
+                attendanceTable.append(`
+                    <tr>
+                        <td>${date}</td>
+                        <td>${day}</td>
+                        <td class="${statusClass}">${record.status}</td>
+                        <td>${record.time || '-'}</td>
+                    </tr>
+                `);
+            });
+            
+            // Update summary cards
+            $("#presentCount").text(presentCount);
+            $("#absentCount").text(absentCount);
+            $("#lateCount").text(lateCount);
+            $("#totalCount").text(records.length);
+        }
+
+        // Fetch the user ID from the session
+        $.ajax({
+            type: "GET",
+            url: "/getUserId",
+            success: function(response) {
+                const userId = response.userId;
+                // Fetch the attendance records for the user
+                $.ajax({
+                    type: "GET",
+                    url: `/attendance/${userId}`,
+                    success: function(records) {
+                        populateTable(records);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Failed to fetch attendance records");
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Failed to fetch user ID");
+            }
+        });
+
+        // Handle Logout button click
+        $("#logoutButton").on("click", function() {
+            $.ajax({
+                type: "POST",
+                url: "/logout",
+                success: function(response) {
+                    window.location.href = "/login";
+                },
+                error: function(error) {
+                    console.error("Logout failed", error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
